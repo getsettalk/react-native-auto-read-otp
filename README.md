@@ -24,6 +24,33 @@ When your app is downloaded from the **Play Store**, the **hash key** used in th
 
 The root cause of the issue is that the **SHA1 certificate** used to sign your app for release in the Play Store is different from the one used in your local development environment. To resolve this, you need to use the **SHA1 certificate** from Google Play and generate a new hash key.
 
+
+## you can use this to get hash key to set in sms 
+so you have to use adb commnad :
+
+```
+$ adb logcat |  grep "APPApp hash:"
+04-02 12:36:04.211  9467  9527 I ReactNativeJS: 'APPApp hash:', [ 'xtU+/Q+OYAf' ]
+
+```
+
+in this `APPApp hash:` is a console.log key to see in log 
+
+```
+  useEffect(() => {
+    getHash()
+      .then(async hash => {
+        console.log('APPApp hash:', hash)
+        console.log("check res", res)
+      })
+      .catch(console.warn);
+
+  }, []);
+```
+
+than you will get proper hask key which you can use.
+
+
 ### Step-by-Step Guide to Fix the Issue
 
 ### 1. Get the Correct SHA1 Certificate from Play Store
